@@ -90,7 +90,10 @@
 (use-package command-log-mode)
 
 (use-package doom-themes
-  :init (load-theme 'doom-palenight t))
+  :init (load-theme 'doom-molokai t))
+
+(use-package organic-green-theme
+  :init (load-theme 'organic-green t))
 
 (use-package all-the-icons)
 ;; all-the-icons-install-fonts
