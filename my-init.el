@@ -95,9 +95,6 @@
 (use-package organic-green-theme
   :init (load-theme 'organic-green t))
 
-(use-package all-the-icons)
-;; all-the-icons-install-fonts
-
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 32)))
@@ -153,3 +150,32 @@
   ([remap describe-key] . helpful-key))
 
   
+(use-package all-the-icons
+  :if (display-graphic-p)
+  :commands all-the-icons-install-fonts
+  :init
+  (unless (find-font (font-spec :name "all-the-icons"))
+    (all-the-icons-install-fonts t)))
+
+(use-package all-the-icons-dired
+  :if (display-graphic-p)
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package general)
+
+(general-define-key
+  "C-M-j" 'counsel-switch-buffer)
+
+(use-package projectile
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/Pro-Tech")
+    (setq projectile-project-search-path '("~/Pro-Tech")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+
