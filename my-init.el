@@ -18,13 +18,14 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
-
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
 (set-fringe-mode 10)        ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
+
+(global-hl-line-mode 1)     ; highlight current line
 
 ;; Set up the visible bell
 (setq visible-bell t)
@@ -77,6 +78,14 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+(use-package nerd-icons
+;; :custom
+;; The Nerd Font you want to use in GUI
+;; "Symbols Nerd Font Mono" is the default and is recommended
+;; but you can use any other Nerd Font if you want
+;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+)
 
 (use-package auto-package-update
   :custom
@@ -149,7 +158,34 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-  
+(use-package terraform-mode)
+(use-package yaml-mode)
+
+(global-whitespace-mode 1)
+;; see the apropos entry for whitespace-style
+(setq
+   whitespace-style
+   '(face ; viz via faces
+     trailing ; trailing blanks visualized
+     lines-tail ; lines beyond
+                ; whitespace-line-column
+     space-before-tab
+     space-after-tab
+     newline ; lines with only blanks
+     indentation ; spaces used for indent
+                 ; when config wants tabs
+     empty ; empty lines at beginning or end
+     )
+   whitespace-line-column 100 ; column at which
+        ; whitespace-mode says the line is too long
+)
+
+(use-package go-mode)
+;;(use-package add-mode-hook)
+;;(add-mode-hook 'go-mode-hook (lambda ()
+;;			       (setq tab-width 4)))
+
+
 (use-package all-the-icons
   :if (display-graphic-p)
   :commands all-the-icons-install-fonts
