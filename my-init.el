@@ -134,10 +134,10 @@
 	 ("C-r" . 'counsel-minibuffer-history)))
 
 
-(use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1))
+;;(use-package ivy-rich
+;;  :after ivy
+;;  :init
+;;  (ivy-rich-mode 1))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -180,11 +180,25 @@
         ; whitespace-mode says the line is too long
 )
 
+;; go stuff
 (use-package go-mode)
+(use-package go-eldoc)
+
 ;;(use-package add-mode-hook)
-;;(add-mode-hook 'go-mode-hook (lambda ()
+;;(add-hook 'go-mode-hook (lambda ()
 ;;			       (setq tab-width 4)))
 
+(setenv "GOPATH" (concat (getenv "HOME") "/go"))
+(setenv "PATH" (concat (getenv "PATH") (concat (concat ":" (getenv "GOPATH")) "/bin")))
+
+(setq exec-path (append exec-path '(concat (getenv("GOPATH") "/bin"))))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/go/bin"))
+(setq exec-path (append exec-path '("/usr/local/go/bin")))
+
+(add-hook 'before-save-hook 'gofmt-before-save)
+;;https://honnef.co/articles/writing-go-in-emacs/
+;;(add-hook 'go-mode-hook (lambda ()
+;;                          (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
 
 (use-package all-the-icons
   :if (display-graphic-p)
@@ -215,3 +229,8 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
+
+;; set the starting window size
+(setq default-frame-alist
+      '((top . 100) (left . 100)
+        (width . 250) (height . 800)))
