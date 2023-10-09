@@ -234,3 +234,7 @@
 (setq default-frame-alist
       '((top . 100) (left . 100)
         (width . 250) (height . 800)))
+
+;; central backup file location
+(setq backup-directory-alist '(("." . "~/.emacs_backups")))
+(setq backup-by-copying t)
