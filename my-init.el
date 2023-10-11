@@ -18,10 +18,10 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
+;;(scroll-bar-mode -1)        ; Disable visible scrollbar
+;(tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
+;;(set-fringe-mode 10)        ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
 
@@ -176,7 +176,7 @@
                  ; when config wants tabs
      empty ; empty lines at beginning or end
      )
-   whitespace-line-column 100 ; column at which
+   whitespace-line-column 128 ; column at which
         ; whitespace-mode says the line is too long
 )
 
@@ -238,3 +238,5 @@
 ;; central backup file location
 (setq backup-directory-alist '(("." . "~/.emacs_backups")))
 (setq backup-by-copying t)
+
+(global-set-key "j" 'eshell)
